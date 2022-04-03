@@ -1,10 +1,11 @@
 import React from "react";
 
-const AddTodoForm = () => {
+const AddTodoForm = ({onAddTodo}) => {
     const handleAddTodo = (event) => {
         event.preventDefault();
         const todoTitleField = event.target[0];
-        console.log(todoTitleField.value);
+        const newTodo = todoTitleField.value;
+        onAddTodo(newTodo);
         todoTitleField.value = "";
 
     }
