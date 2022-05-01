@@ -1,4 +1,4 @@
-const InputWithLabel = ({id, type="text", value, handleTitleChange, children }) => {
+const InputWithLabel = ({id, type="text", value, handleTitleChange, children, isFocused }) => {
    return  (<>
             <label htmlFor={id}>
                 {children}
@@ -7,6 +7,7 @@ const InputWithLabel = ({id, type="text", value, handleTitleChange, children }) 
             type={type}
             value={value} 
             onChange={handleTitleChange} 
+            autoFocus={isFocused}
             id={id}/>
             </>);
 };
