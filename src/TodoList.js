@@ -2,9 +2,9 @@ import React from "react";
 import TodoListItem from "./ToDoListItem";
 
   
-  const TodoList = ({todoList}) => (
+  const TodoList = ({todoList, onRemoveTodo}) => (
      
-    todoList.map(todo => (<TodoListItem key={todo.id} todo={todo}/>)
+    todoList.map(todo => (<TodoListItem key={todo.id} todo={todo} onRemoveTodo={onRemoveTodo}/>)
         )
     );
 
