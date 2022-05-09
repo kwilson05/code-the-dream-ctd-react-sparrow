@@ -8,16 +8,19 @@ const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    new Promise((resolve, reject) =>
-      setTimeout(
-        resolve({
-          data: {
-            todoList: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
-          },
-        }),
-        2000
-      )
-    ).then((result) => {
+    new Promise((resolve, reject) => {
+      return setTimeout(
+        () =>
+          resolve({
+            data: {
+              todoList:
+                JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
+            },
+          }),
+        5000
+      );
+    }).then((result) => {
+      console.log(result);
       setTodoList(result.data.todoList);
       setIsLoading(false);
     });
@@ -43,7 +46,12 @@ const App = () => {
         <h1>{"Todo List"}</h1>
       </header>
       <AddTodoForm onAddTodo={addTodo} />
-      <TodoList todoList={todoList} onRemoveTodo={removeItem} />
+
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <TodoList todoList={todoList} onRemoveTodo={removeItem} />
+      )}
     </>
   );
 };
