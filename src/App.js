@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TodoList from "./TodoList";
 import { useEffect } from "react";
 import AddTodoForm from "./AddTodoForm";
@@ -20,7 +21,6 @@ const App = () => {
         5000
       );
     }).then((result) => {
-      console.log(result);
       setTodoList(result.data.todoList);
       setIsLoading(false);
     });
@@ -30,7 +30,7 @@ const App = () => {
     if (!isLoading) {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoList));
     }
-  }, [todoList]);
+  }, [todoList, isLoading]);
 
   const addTodo = (newTodo) => {
     setTodoList([newTodo, ...todoList]);
@@ -41,18 +41,28 @@ const App = () => {
   };
 
   return (
-    <>
-      <header>
-        <h1>{"Todo List"}</h1>
-      </header>
-      <AddTodoForm onAddTodo={addTodo} />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          exact
+          element={
+            <>
+              <h1>{"Todo List"}</h1>
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <TodoList todoList={todoList} onRemoveTodo={removeItem} />
-      )}
-    </>
+              <AddTodoForm onAddTodo={addTodo} />
+
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <TodoList todoList={todoList} onRemoveTodo={removeItem} />
+              )}
+            </>
+          }
+        ></Route>
+        <Route path="/new" exact element={<h1>Kasozi is new</h1>}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
