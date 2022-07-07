@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList";
 import { useEffect } from "react";
-import AddTodoForm from "./AddTodoForm";
+import AddTodoForm from "./components/AddTodoForm";
 
 const App = () => {
   const LOCAL_STORAGE_KEY = "savedTodoList";
