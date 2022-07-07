@@ -8,22 +8,24 @@ const App = () => {
   const LOCAL_STORAGE_KEY = "savedTodoList";
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const fetch_url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      return setTimeout(
-        () =>
-          resolve({
-            data: {
-              todoList:
-                JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [],
-            },
-          }),
-        5000
-      );
-    }).then((result) => {
-      setTodoList(result.data.todoList);
-      setIsLoading(false);
-    });
+    fetch(fetch_url, {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        const todoList = result.records.map((item) => ({
+          id: item.id,
+          title: item.fields.Title,
+        }));
+
+        setTodoList(todoList);
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
