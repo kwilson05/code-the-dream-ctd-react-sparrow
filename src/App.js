@@ -8,10 +8,12 @@ const App = () => {
   const LOCAL_STORAGE_KEY = "savedTodoList";
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const sortQueryParam = "sort[0][field]=Title";
+  const viewQueryParam = "view=Grid%20view";
+  const base_airtable_url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
 
-  const fetch_url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view`;
   useEffect(() => {
-    fetch(fetch_url, {
+    fetch(`${base_airtable_url}?${viewQueryParam}&${sortQueryParam}`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
       },
@@ -26,7 +28,7 @@ const App = () => {
         setTodoList(todoList);
         setIsLoading(false);
       });
-  }, [fetch_url]);
+  }, [base_airtable_url]);
 
   useEffect(() => {
     if (!isLoading) {
