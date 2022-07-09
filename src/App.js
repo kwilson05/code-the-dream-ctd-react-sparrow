@@ -9,7 +9,7 @@ const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetch_url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+  const fetch_url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default?view=Grid%20view`;
   useEffect(() => {
     fetch(fetch_url, {
       headers: {
@@ -26,7 +26,7 @@ const App = () => {
         setTodoList(todoList);
         setIsLoading(false);
       });
-  }, []);
+  }, [fetch_url]);
 
   useEffect(() => {
     if (!isLoading) {
