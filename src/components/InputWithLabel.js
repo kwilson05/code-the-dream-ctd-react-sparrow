@@ -33,9 +33,9 @@ const InputWithLabel = ({
 
 InputWithLabel.propTypes = {
   id: propTypes.string.isRequired,
-  value: propTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
   handleTitleChange: propTypes.func,
-  children: propTypes.element,
+  children: propTypes.oneOfType([propTypes.element, propTypes.string]),
   isFocused: propTypes.bool,
 };
 
