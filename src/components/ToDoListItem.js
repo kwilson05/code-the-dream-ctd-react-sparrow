@@ -1,3 +1,4 @@
+import propTypes from "prop-types";
 const TodoListItem = ({ todo, onRemoveTodo }) => (
   <>
     <li>{todo.title}</li>
@@ -11,5 +12,10 @@ const TodoListItem = ({ todo, onRemoveTodo }) => (
     </button>
   </>
 );
+
+TodoListItem.propTypes = {
+  todo: propTypes.object.isRequired,
+  onRemoveTodo: propTypes.object.isRequired,
+};
 
 export default TodoListItem;

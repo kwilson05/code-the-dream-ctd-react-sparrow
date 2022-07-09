@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import propTypes from "prop-types";
 
 const InputWithLabel = ({
   id,
@@ -28,6 +29,14 @@ const InputWithLabel = ({
       />
     </>
   );
+};
+
+InputWithLabel.propTypes = {
+  id: propTypes.string.isRequired,
+  value: propTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  handleTitleChange: propTypes.func,
+  children: propTypes.element,
+  isFocused: propTypes.bool,
 };
 
 export default InputWithLabel;
